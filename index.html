@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engargoladora 181S - Guía de Aprendizaje</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8f7f4;--bg2:#fff;--text:#1a1a18;--text2:#5a5a56;--text3:#888780;
+  --border:#e0ddd6;--accent:#1d9e75;--accent2:#0f6e56;--warn:#ba7517;
+  --info:#185fa5;--danger:#a32d2d;--card:#fff;--shadow:0 2px 12px rgba(0,0,0,.07);
+  --radius:12px;--radius-sm:8px
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#1c1c1a;--bg2:#252523;--text:#e8e6de;--text2:#a8a69e;--text3:#686660;
+    --border:#38362e;--accent:#1d9e75;--card:#252523;--shadow:0 2px 12px rgba(0,0,0,.3)}
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+header{background:var(--accent2);color:#fff;padding:2rem 1.5rem;text-align:center}
+header h1{font-size:1.6rem;font-weight:600;margin-bottom:.4rem}
+header p{opacity:.8;font-size:.9rem}
+nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:.6rem 1.5rem;position:sticky;top:0;z-index:100;display:flex;gap:.5rem;flex-wrap:wrap}
+nav a{color:var(--text2);text-decoration:none;font-size:.82rem;padding:.3rem .7rem;border-radius:20px;border:1px solid var(--border);transition:all .2s}
+nav a:hover,nav a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.container{max-width:860px;margin:0 auto;padding:2rem 1.5rem}
+section{margin-bottom:3.5rem}
+h2{font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:.5rem}
+h3{font-size:1rem;font-weight:600;color:var(--text);margin:1.2rem 0 .6rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.card-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.card-row{grid-template-columns:1fr}}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:.2rem .55rem;border-radius:20px;margin-right:.3rem}
+.badge-green{background:#e1f5ee;color:#0f6e56}
+.badge-amber{background:#faeeda;color:#854f0b}
+.badge-red{background:#fcebeb;color:#791f1f}
+.badge-blue{background:#e6f1fb;color:#185fa5}
+.badge-purple{background:#eeedfe;color:#3c3489}
+@media(prefers-color-scheme:dark){
+  .badge-green{background:#085041;color:#9fe1cb}
+  .badge-amber{background:#633806;color:#fac775}
+  .badge-red{background:#501313;color:#f7c1c1}
+  .badge-blue{background:#042c53;color:#b5d4f4}
+  .badge-purple{background:#26215c;color:#afa9ec}
+}
+.alert{border-left:3px solid;padding:.8rem 1rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:.8rem 0;font-size:.88rem}
+.alert-warn{border-color:var(--warn);background:#faeeda33;color:var(--warn)}
+.alert-danger{border-color:var(--danger);background:#fcebeb33;color:var(--danger)}
+.alert-info{border-color:var(--info);background:#e6f1fb33;color:var(--info)}
+@media(prefers-color-scheme:dark){
+  .alert-warn{background:#63380622;color:#fac775}
+  .alert-danger{background:#50131322;color:#f7c1c1}
+  .alert-info{background:#042c5322;color:#b5d4f4}
+}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.8rem 0}
+th{background:var(--bg);color:var(--text2);font-weight:600;padding:.55rem .75rem;text-align:left;border-bottom:2px solid var(--border)}
+td{padding:.5rem .75rem;border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+.param{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.param:last-child{border-bottom:none}
+.param-val{font-weight:600;color:var(--accent2);font-size:.9rem}
+.stepper{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.step-header{display:flex;align-items:center;gap:.75rem;padding:1rem 1.2rem;background:var(--bg);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.step-dots{display:flex;gap:.4rem;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .2s}
+.dot.active{background:var(--accent);transform:scale(1.15)}
+.step-body{padding:1.4rem}
+.step-visual{height:190px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:1rem;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.step-title{font-weight:600;font-size:.95rem;color:var(--accent2);margin-bottom:.4rem}
+.step-desc{font-size:.88rem;color:var(--text2);line-height:1.6}
+.step-nav{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.2rem;border-top:1px solid var(--border);background:var(--bg)}
+.btn{background:transparent;border:1px solid var(--border);color:var(--text2);padding:.45rem 1.1rem;border-radius:20px;cursor:pointer;font-size:.82rem;transition:all .2s}
+.btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{background:var(--accent2)}
+.step-counter{font-size:.8rem;color:var(--text3)}
+.sys-flow{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;padding:.8rem 0;font-size:.85rem}
+.sys-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.4rem .8rem;font-weight:500;white-space:nowrap}
+.sys-box.highlight{background:#e1f5ee;border-color:var(--accent);color:var(--accent2)}
+@media(prefers-color-scheme:dark){.sys-box.highlight{background:#085041;color:#9fe1cb}}
+.sys-arrow{color:var(--accent);font-size:1rem}
+.tip{background:var(--bg);border-left:3px solid var(--accent);padding:.6rem .9rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.83rem;color:var(--text2);margin-top:.5rem}
+
+/* Diagrama gasificacion interactivo */
+.gas-diagram{position:relative;width:100%;max-width:520px;margin:0 auto}
+.gas-diagram svg{width:100%;height:auto}
+.part-btn{cursor:pointer;transition:opacity .2s}
+.part-btn:hover{opacity:.75}
+.callout{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.7rem .9rem;margin-top:.8rem;font-size:.87rem;min-height:60px;line-height:1.55}
+.callout strong{color:var(--accent2);display:block;margin-bottom:.2rem}
+
+/* Quiz */
+.quiz-q{margin-bottom:1.8rem}
+.quiz-q p{font-weight:500;margin-bottom:.7rem;font-size:.93rem}
+.opt{display:flex;align-items:flex-start;gap:.55rem;padding:.55rem .7rem;border-radius:var(--radius-sm);border:1px solid var(--border);margin:.35rem 0;cursor:pointer;font-size:.87rem;transition:all .2s;user-select:none}
+.opt:hover{border-color:var(--accent);background:var(--bg)}
+.opt.correct{border-color:var(--accent);background:#e1f5ee;color:var(--accent2)}
+.opt.wrong{border-color:var(--danger);background:#fcebeb33;color:var(--danger)}
+@media(prefers-color-scheme:dark){
+  .opt.correct{background:#085041;color:#9fe1cb}
+  .opt.wrong{background:#50131322;color:#f7c1c1}
+}
+.opt-mark{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+.opt.correct .opt-mark{background:var(--accent);border-color:var(--accent);color:#fff}
+.opt.wrong .opt-mark{background:var(--danger);border-color:var(--danger);color:#fff}
+.opt.multi .opt-mark{border-radius:3px}
+.feedback{font-size:.8rem;margin-top:.4rem;padding:.4rem .7rem;border-radius:var(--radius-sm);display:none}
+.fb-ok{background:#e1f5ee;color:var(--accent2);display:block}
+.fb-bad{background:#fcebeb33;color:var(--danger);display:block}
+@media(prefers-color-scheme:dark){.fb-ok{background:#085041;color:#9fe1cb}.fb-bad{background:#50131322;color:#f7c1c1}}
+.open-q{margin-bottom:1.8rem}
+.open-q p{font-weight:500;margin-bottom:.5rem;font-size:.93rem}
+.open-q input{width:100%;padding:.55rem .8rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:.88rem}
+.open-q input:focus{outline:none;border-color:var(--accent)}
+.order-list{list-style:none}
+.order-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.55rem .9rem;margin:.35rem 0;cursor:grab;font-size:.87rem;display:flex;align-items:center;gap:.6rem;transition:all .2s}
+.order-item:hover{border-color:var(--accent)}
+.order-item.dragging{opacity:.4}
+.order-item.over{border-color:var(--accent);background:#e1f5ee33}
+.drag-handle{color:var(--text3);font-size:.8rem}
+.quiz-result{background:var(--bg);border-radius:var(--radius);padding:1.2rem;text-align:center;margin-top:1.5rem}
+.score-num{font-size:2.2rem;font-weight:600;color:var(--accent2)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Engargoladora Pneumatic Scale Angelus 181S</h1>
+  <p>Guía de aprendizaje — Filtración, lubricación y gasificación</p>
+</header>
+
+<nav id="main-nav">
+  <a href="#filtros">Filtros</a>
+  <a href="#procedimientos">Procedimientos</a>
+  <a href="#grasa">Lubricación de grasa</a>
+  <a href="#rodillos">Rodillos</a>
+  <a href="#gasificacion">Gasificación</a>
+  <a href="#rompeburbujas">Rompeburbujas</a>
+  <a href="#quiz">Cuestionario</a>
+</nav>
+
+<div class="container">
+
+<!-- SECCIÓN 1: FILTROS -->
+<section id="filtros">
+  <h2>Sistema de filtración de aceite</h2>
+  <p style="color:var(--text2);margin-bottom:1.2rem;font-size:.9rem">El aceite lubricante circula constantemente por la máquina y puede contaminarse con partículas y humedad. El sistema de filtración lo limpia antes de que llegue a los componentes internos.</p>
+  <div class="card">
+    <h3>Flujo del aceite en el sistema</h3>
+    <div class="sys-flow">
+      <div class="sys-box">Bomba de aceite</div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box highlight">Filtro de línea 5L414<br><small style="font-weight:400;color:var(--text3)">25 micras</small></div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box highlight">Filtro de bolsa principal<br><small style="font-weight:400;color:var(--text3)">Elimina agua y contaminantes</small></div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box">Componentes de la máquina</div>
+    </div>
+    <div class="alert alert-info">Ambos filtros trabajan en serie y se reemplazan siempre juntos, al mismo tiempo.</div>
+  </div>
+  <div class="card-row">
+    <div class="card">
+      <span class="badge badge-blue">Filtro 1</span>
+      <h3>Filtro de línea 5L414</h3>
+      <div class="param"><span>Modelo</span><span class="param-val">5L414</span></div>
+      <div class="param"><span>Capacidad</span><span class="param-val">25 micras</span></div>
+      <div class="param"><span>Ubicación</span><span class="param-val">Salida de la bomba</span></div>
+      <div class="param"><span>Función</span><span class="param-val">Filtra partículas finas</span></div>
+    </div>
+    <div class="card">
+      <span class="badge badge-green">Filtro 2</span>
+      <h3>Filtro de bolsa principal</h3>
+      <div class="param"><span>Tipo</span><span class="param-val">Bolsa con anillo metálico</span></div>
+      <div class="param"><span>Función</span><span class="param-val">Elimina agua y contaminantes</span></div>
+      <div class="param"><span>Cambio</span><span class="param-val">Cada 6 meses o &gt;90 psi</span></div>
+      <div class="param"><span>Aceite reutilizable</span><span class="param-val">Sí</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>¿Cuándo reemplazarlos?</h3>
+    <div class="card-row">
+      <div><span class="badge badge-amber">Condición 1</span><p style="margin-top:.5rem;font-size:.88rem">Después de <strong>6 meses</strong> de operación continua</p></div>
+      <div><span class="badge badge-red">Condición 2</span><p style="margin-top:.5rem;font-size:.88rem">Cuando el manómetro supera <strong>90 psi</strong> (zona roja)</p></div>
+    </div>
+    <div class="alert alert-info" style="margin-top:.8rem">No es necesario apagar la engargoladora para reemplazar los filtros. Solo se detiene el motor del sistema de filtración.</div>
+  </div>
+</section>
+
+<!-- SECCIÓN 2: PROCEDIMIENTOS -->
+<section id="procedimientos">
+  <h2>Procedimientos de reemplazo</h2>
+  <div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+    <button class="btn btn-primary" onclick="showFilter(1)" id="btn-f1">Filtro de eliminación de agua</button>
+    <button class="btn" onclick="showFilter(2)" id="btn-f2">Filtro de descontaminación</button>
+  </div>
+  <div id="filter1">
+    <div class="stepper">
+      <div class="step-header"><div class="step-dots" id="dots1"></div><span id="step-label1" style="font-size:.82rem;color:var(--text2)">Paso 1 de 8</span></div>
+      <div class="step-body">
+        <div class="step-visual" id="visual1"></div>
+        <div class="step-title" id="stitle1"></div>
+        <div class="step-desc" id="sdesc1"></div>
+      </div>
+      <div class="step-nav">
+        <button class="btn" onclick="prevStep(1)">Anterior</button>
+        <span class="step-counter" id="scounter1"></span>
+        <button class="btn btn-primary" onclick="nextStep(1)">Siguiente</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h3>Puntos críticos</h3>
+      <div class="tip">Usa la correa de tela exterior para asentar el anillo metálico — las tiras internas se rompen.</div>
+      <div class="tip">Guarda el aceite drenado: puedes reutilizarlo para llenar la bolsa nueva antes de cerrar.</div>
+      <div class="tip">Revisa siempre la junta tórica — si tiene grietas o deformación, cámbiala.</div>
+    </div>
+  </div>
+  <div id="filter2" style="display:none">
+    <div class="stepper">
+      <div class="step-header"><div class="step-dots" id="dots2"></div><span id="step-label2" style="font-size:.82rem;color:var(--text2)">Paso 1 de 10</span></div>
+      <div class="step-body">
+        <div class="step-visual" id="visual2"></div>
+        <div class="step-title" id="stitle2"></div>
+        <div class="step-desc" id="sdesc2"></div>
+      </div>
+      <div class="step-nav">
+        <button class="btn" onclick="prevStep(2)">Anterior</button>
+        <span class="step-counter" id="scounter2"></span>
+        <button class="btn btn-primary" onclick="nextStep(2)">Siguiente</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <h3>Diferencias clave vs. filtro de bolsa</h3>
+      <table>
+        <tr><th>Aspecto</th><th>Filtro bolsa</th><th>Filtro descontaminación</th></tr>
+        <tr><td>Elemento filtrante</td><td>Bolsa con anillo metálico</td><td>Elemento cilíndrico en poste</td></tr>
+        <tr><td>Cierre</td><td>Anillo de sujeción simple</td><td>Manija en T roscada</td></tr>
+        <tr><td>Orientación crítica</td><td>Anillo metálico bien asentado</td><td>Balín arriba, juntas tóricas abajo</td></tr>
+        <tr><td>Pasos</td><td>8</td><td>10</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 3: GRASA -->
+<section id="grasa">
+  <h2>Sistema de lubricación de grasa automática</h2>
+  <div class="card-row">
+    <div class="card">
+      <h3>Parámetros del sistema</h3>
+      <div class="param"><span>Grasa requerida</span><span class="param-val">N.L.G.I. No. 1</span></div>
+      <div class="param"><span>Cantidad por ciclo</span><span class="param-val">1.2 cm³</span></div>
+      <div class="param"><span>Puntos lubricados</span><span class="param-val">6 puntos</span></div>
+      <div class="param"><span>Duración carga completa</span><span class="param-val">~14.12 horas</span></div>
+      <div class="param"><span>Control</span><span class="param-val">PLC automático</span></div>
+    </div>
+    <div class="card">
+      <h3>Alertas críticas</h3>
+      <div class="alert alert-warn">Si la válvula no cicla en 5 minutos → Alarma de falla de grasa en pantalla HMI</div>
+      <div class="alert alert-danger">Si la alarma persiste 4 horas → La máquina desacelera hasta detenerse</div>
+      <div class="alert alert-info">Para limpiar la alarma → Presionar botón de Reinicio después de resolver el problema</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>6 puntos de lubricación</h3>
+    <table>
+      <tr><th>Línea</th><th>Punto de lubricación</th></tr>
+      <tr><td><span class="badge badge-green">1</span></td><td>Torreta de costura — Anillo V</td></tr>
+      <tr><td><span class="badge badge-green">2</span></td><td>Carcasa de freno</td></tr>
+      <tr><td><span class="badge badge-green">3</span></td><td>Cojinete interior de cinta transportadora de descarga</td></tr>
+      <tr><td><span class="badge badge-green">4</span></td><td>Sello de la torreta de alimentación</td></tr>
+      <tr><td><span class="badge badge-green">5</span></td><td>Cojinete exterior de cinta transportadora de descarga</td></tr>
+      <tr><td><span class="badge badge-green">6</span></td><td>Sello de la torreta de descarga</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- SECCIÓN 4: RODILLOS -->
+<section id="rodillos">
+  <h2>Lubricación manual de rodillos de sellado</h2>
+  <div class="card-row">
+    <div class="card">
+      <span class="badge badge-blue">Tipo A</span>
+      <h3>Rodamiento cónico</h3>
+      <div class="param"><span>Frecuencia</span><span class="param-val">Cada 8 horas</span></div>
+      <div class="param"><span>Tras sanitización caliente</span><span class="param-val">Siempre</span></div>
+      <div class="param"><span>Grasa</span><span class="param-val">N.L.G.I. 'O'</span></div>
+    </div>
+    <div class="card">
+      <span class="badge badge-amber">Tipo B</span>
+      <h3>Rodamiento bolas cerámicas</h3>
+      <div class="param"><span>Frecuencia</span><span class="param-val">Cada 72 horas</span></div>
+      <div class="param"><span>Tras sanitización caliente</span><span class="param-val">Siempre</span></div>
+      <div class="param"><span>Grasa</span><span class="param-val">N.L.G.I. 'O'</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Flujo de la grasa</h3>
+    <div class="sys-flow">
+      <div class="sys-box">Pistola de grasa</div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box highlight">Punto Alemite</div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box">Fluye por el rodamiento</div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box highlight">Escudo Superior — expulsa grasa vieja</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 5: GASIFICACIÓN -->
+<section id="gasificacion">
+  <h2>Sistema de gasificación (UCG)</h2>
+  <p style="color:var(--text2);margin-bottom:1.2rem;font-size:.9rem">El sistema UCG reemplaza el aire dentro de la lata con CO₂ o N₂ antes de sellarla para conservar el producto y alargar su vida útil.</p>
+
+  <div class="card">
+    <h3>Figura 9-1: Gasificación bajo cubierta en lata llena</h3>
+    <p style="font-size:.87rem;color:var(--text2);margin-bottom:1rem">Diagrama oficial del manual — haz clic en cada botón para ver la descripción de cada componente.</p>
+
+    <img src="img/figura9-1.jpg"
+         alt="Figura 9-1: Gasificación bajo cubierta en lata llena"
+         style="width:100%;border-radius:var(--radius-sm);border:1px solid var(--border);display:block;margin-bottom:1rem">
+
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem">
+      <button class="btn" onclick="showPart(1)" style="display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#1d9e75;color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</span>Torreta de alimentación</button>
+      <button class="btn" onclick="showPart(2)" style="display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#185fa5;color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</span>Placa de la torreta</button>
+      <button class="btn" onclick="showPart(3)" style="display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#ba7517;color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</span>Empujador de tapas</button>
+      <button class="btn" onclick="showPart(4)" style="display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#534ab7;color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">4</span>Inserto de la torreta</button>
+      <button class="btn" onclick="showPart(5)" style="display:flex;align-items:center;gap:.4rem"><span style="width:18px;height:18px;border-radius:50%;background:#d85a30;color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">5</span>Riel de guía de tapas</button>
+    </div>
+
+    <div class="callout" id="part-callout">
+      <span style="color:var(--text3);font-size:.85rem">Selecciona un componente para ver su descripción.</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h3>¿Qué sucede en el proceso?</h3>
+    <div class="sys-flow" style="flex-direction:column;align-items:flex-start;gap:.4rem">
+      <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box">Lata llena sube desde el llenador</div></div>
+      <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+      <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box highlight">CO₂ fluye por la placa y el inserto hacia el espacio cabeza</div></div>
+      <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+      <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box">El gas desplaza el aire del espacio cabeza</div></div>
+      <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+      <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box highlight">El empujador coloca la tapa sobre la lata</div></div>
+      <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+      <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box">La lata pasa al sellado con CO₂ adentro</div></div>
+    </div>
+    <div class="alert alert-info" style="margin-top:.8rem">La tapa nunca debe caer sobre la lata — la lata debe recoger la tapa al subir hacia el mandril de costura.</div>
+  </div>
+
+  <div class="card-row">
+    <div class="card">
+      <h3>Parámetros operativos</h3>
+      <div class="param"><span>Presión máx. entrada CO₂</span><span class="param-val">6 bar (87 psi)</span></div>
+      <div class="param"><span>Temperatura máx. gas</span><span class="param-val">70°F (21.1°C)</span></div>
+      <div class="param"><span>Presión regulador control</span><span class="param-val">2 bar (29 psi)</span></div>
+      <div class="param"><span>Presión válvula control</span><span class="param-val">6 bar (87 psi)</span></div>
+    </div>
+    <div class="card">
+      <h3>Causas de baja eficiencia</h3>
+      <div class="tip">Transferencia brusca de latas — caída máx. 0.012–0.016 in</div>
+      <div class="tip">Ranuras obstruidas en la torreta de alimentación</div>
+      <div class="tip">Tapa cayendo sobre la lata en lugar de que la lata la recoja</div>
+      <div class="tip">Fugas en mangueras o conexiones del sistema de gas</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 6: ROMPEBURBUJAS -->
+<section id="rompeburbujas">
+  <h2>Sistema rompeburbujas</h2>
+  <p style="color:var(--text2);margin-bottom:1.2rem;font-size:.9rem">En bebidas carbonatadas, el llenado genera espuma que atrapa aire. Los rompeburbujas lo eliminan antes del sellado.</p>
+  <div class="card-row">
+    <div class="card">
+      <h3>Especificaciones</h3>
+      <div class="param"><span>Ubicación</span><span class="param-val">Extensión alim. de latas</span></div>
+      <div class="param"><span>Activación</span><span class="param-val">Válvula solenoide</span></div>
+      <div class="param"><span>Presión máxima</span><span class="param-val">30 psi</span></div>
+      <div class="param"><span>Gas usado</span><span class="param-val">CO₂</span></div>
+    </div>
+    <div class="card">
+      <h3>Secuencia de trabajo</h3>
+      <div class="sys-flow" style="flex-direction:column;align-items:flex-start;gap:.4rem">
+        <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box">Llenado genera espuma</div></div>
+        <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+        <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box highlight">Rompeburbujas descarga CO₂</div></div>
+        <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+        <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box highlight">Gasificación reemplaza el aire</div></div>
+        <div style="margin-left:.5rem;color:var(--accent)">↓</div>
+        <div style="display:flex;align-items:center;gap:.5rem"><div class="sys-box">Sellado sin oxígeno</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUESTIONARIO -->
+<section id="quiz">
+  <h2>Cuestionario de evaluación</h2>
+  <p style="color:var(--text2);margin-bottom:1.5rem;font-size:.88rem">Responde todas las preguntas y presiona "Ver resultado" al terminar.</p>
+  <div id="quiz-form">
+
+    <div class="quiz-q"><p>1. ¿Cuándo hay que cambiar el filtro de eliminación de agua? <span class="badge badge-blue">Selecciona todas las correctas</span></p>
+      <div class="opt multi" data-q="1" data-v="a" data-correct="true" onclick="toggleMulti(this)"><div class="opt-mark">□</div>Después de 6 meses de operación</div>
+      <div class="opt multi" data-q="1" data-v="b" onclick="toggleMulti(this)"><div class="opt-mark">□</div>Cada tres meses</div>
+      <div class="opt multi" data-q="1" data-v="c" data-correct="true" onclick="toggleMulti(this)"><div class="opt-mark">□</div>Cuando la presión supera 90 psi (zona roja)</div>
+      <div class="opt multi" data-q="1" data-v="d" onclick="toggleMulti(this)"><div class="opt-mark">□</div>Cuando el aceite se encuentra en zona naranja</div>
+    </div>
+
+    <div class="quiz-q"><p>2. ¿Para qué se utiliza el filtro de eliminación de agua?</p>
+      <div class="opt" data-q="2" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Para filtrar el agua que se provee a la máquina</div>
+      <div class="opt" data-q="2" data-v="b" onclick="selectSingle(this)"><div class="opt-mark"></div>Para eliminar el agua de las tuberías y evitar que se mezcle con la grasa</div>
+      <div class="opt" data-q="2" data-v="c" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>Elimina el agua y la humedad que se mezcla con el aceite lubricante</div>
+      <div class="opt" data-q="2" data-v="d" onclick="selectSingle(this)"><div class="opt-mark"></div>Para evitar que le entre agua a la máquina</div>
+    </div>
+
+    <div class="quiz-q"><p>3. ¿Dónde se ubica el filtro de línea?</p>
+      <div class="opt" data-q="3" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Antes de la bomba de aceite</div>
+      <div class="opt" data-q="3" data-v="b" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>Después de la bomba de aceite</div>
+      <div class="opt" data-q="3" data-v="c" onclick="selectSingle(this)"><div class="opt-mark"></div>Entre la bomba de aceite y la alimentación del lubricante (es lo mismo)</div>
+    </div>
+
+    <div class="quiz-q"><p>4. ¿Cuál es el modelo y capacidad del filtro de línea?</p>
+      <div class="opt" data-q="4" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>5L414 de 32 micras</div>
+      <div class="opt" data-q="4" data-v="b" onclick="selectSingle(this)"><div class="opt-mark"></div>5L415 de 22 micras</div>
+      <div class="opt" data-q="4" data-v="c" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>5L414 de 25 micras</div>
+      <div class="opt" data-q="4" data-v="d" onclick="selectSingle(this)"><div class="opt-mark"></div>5L415 de 35 micras</div>
+    </div>
+
+    <div class="quiz-q"><p>5. ¿Qué hace exactamente el filtro de línea?</p>
+      <div class="opt" data-q="5" data-v="a" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>Atrapa partículas contaminantes de 25 micrómetros o menos</div>
+      <div class="opt" data-q="5" data-v="b" onclick="selectSingle(this)"><div class="opt-mark"></div>Atrapa partículas contaminantes de 22 micrómetros o menos</div>
+      <div class="opt" data-q="5" data-v="c" onclick="selectSingle(this)"><div class="opt-mark"></div>Atrapa partículas contaminantes de 35 micrómetros o menos</div>
+    </div>
+
+    <div class="quiz-q"><p>6. ¿Qué es la bolsa de elemento principal?</p>
+      <div class="opt" data-q="6" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Un filtro que elimina partículas y suciedad en el aceite</div>
+      <div class="opt" data-q="6" data-v="b" onclick="selectSingle(this)"><div class="opt-mark"></div>Una estación de purificación del aceite</div>
+      <div class="opt" data-q="6" data-v="c" onclick="selectSingle(this)"><div class="opt-mark"></div>Un saco donde se almacena la suciedad del aceite</div>
+      <div class="opt" data-q="6" data-v="d" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>Un filtro que elimina agua y contaminantes del aceite</div>
+    </div>
+
+    <div class="quiz-q"><p>7. Ordena el flujo de aceite (arrastra para ordenar):</p>
+      <ul class="order-list" id="order-list" ondragover="onDragOver(event)">
+        <li class="order-item" draggable="true" data-pos="2" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)"><span class="drag-handle">⠿</span>Filtro de línea</li>
+        <li class="order-item" draggable="true" data-pos="3" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)"><span class="drag-handle">⠿</span>Filtro de bolsa principal</li>
+        <li class="order-item" draggable="true" data-pos="1" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)"><span class="drag-handle">⠿</span>Bomba de aceite</li>
+      </ul>
+      <div class="feedback" id="order-feedback"></div>
+    </div>
+
+    <div class="quiz-q"><p>8. El filtro de línea y la bolsa principal trabajan…</p>
+      <div class="opt" data-q="8" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Después de que el aceite corrió por la máquina, en su recirculación</div>
+      <div class="opt" data-q="8" data-v="b" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>Antes de que el aceite entre a los componentes de la máquina</div>
+    </div>
+
+    <div class="quiz-q"><p>9. Los filtros se reemplazan…</p>
+      <div class="opt" data-q="9" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Según el tiempo de vida individual de cada uno</div>
+      <div class="opt" data-q="9" data-v="b" onclick="selectSingle(this)"><div class="opt-mark"></div>Según el status de cada uno por separado</div>
+      <div class="opt" data-q="9" data-v="c" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>Siempre a la par, al mismo tiempo</div>
+    </div>
+
+    <div class="quiz-q"><p>10. ¿Es necesario apagar la engargoladora para reemplazar los filtros?</p>
+      <div class="opt" data-q="10" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Sí, se debe apagar completamente</div>
+      <div class="opt" data-q="10" data-v="b" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>No, solo se detiene el motor del sistema de filtración</div>
+    </div>
+
+    <div class="open-q">
+      <p>11. ¿A cuántos puntos suministra el sistema de lubricación de grasa? <span class="badge badge-amber">Pregunta abierta</span></p>
+      <input type="text" id="open1" placeholder="Escribe tu respuesta aquí..." oninput="checkOpen(this,'6','open1-fb')">
+      <div class="feedback" id="open1-fb"></div>
+    </div>
+
+    <div class="quiz-q"><p>12. ¿Qué tipo de grasa usa el sistema automático?</p>
+      <div class="opt" data-q="12" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>N.L.G.I. No. 2</div>
+      <div class="opt" data-q="12" data-v="b" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>N.L.G.I. No. 1</div>
+      <div class="opt" data-q="12" data-v="c" onclick="selectSingle(this)"><div class="opt-mark"></div>N.L.G.I. 'O'</div>
+      <div class="opt" data-q="12" data-v="d" onclick="selectSingle(this)"><div class="opt-mark"></div>N.L.G.I. No. 3</div>
+    </div>
+
+    <div class="quiz-q"><p>13. ¿Cuánto dura aproximadamente una bomba de grasa completa?</p>
+      <div class="opt" data-q="13" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>8 horas</div>
+      <div class="opt" data-q="13" data-v="b" onclick="selectSingle(this)"><div class="opt-mark"></div>24 horas</div>
+      <div class="opt" data-q="13" data-v="c" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>~14.12 horas</div>
+      <div class="opt" data-q="13" data-v="d" onclick="selectSingle(this)"><div class="opt-mark"></div>~72 horas</div>
+    </div>
+
+    <div class="quiz-q"><p>14. ¿Qué pasa cuando una alarma de falta de grasa persiste más de 4 horas?</p>
+      <div class="opt" data-q="14" data-v="a" onclick="selectSingle(this)"><div class="opt-mark"></div>Se activa una sirena de emergencia</div>
+      <div class="opt" data-q="14" data-v="b" data-correct="true" onclick="selectSingle(this)"><div class="opt-mark"></div>La máquina desacelera gradualmente hasta detenerse</div>
+      <div class="opt" data-q="14" data-v="c" onclick="selectSingle(this)"><div class="opt-mark"></div>Se detiene inmediatamente sin aviso</div>
+      <div class="opt" data-q="14" data-v="d" onclick="selectSingle(this)"><div class="opt-mark"></div>Solo se apaga la pantalla HMI</div>
+    </div>
+
+    <!-- P15: Ordenar componentes gasificación -->
+    <div class="quiz-q">
+      <p>15. Ordena los componentes de la figura de gasificación según su número en el diagrama (del 1 al 5): <span class="badge badge-purple">Arrastra para ordenar</span></p>
+      <div style="background:var(--bg);border-radius:var(--radius-sm);padding:.7rem;margin-bottom:.7rem;font-size:.83rem;color:var(--text2)">
+        Referencia visual — componentes de la Figura 9-1:
+        <svg viewBox="0 0 380 90" style="width:100%;max-width:380px;display:block;margin-top:.5rem">
+          <rect x="140" y="50" width="100" height="35" rx="4" fill="#e6f1fb" stroke="#378add" stroke-width="1"/>
+          <text x="190" y="71" text-anchor="middle" font-size="8" fill="#0c447c" font-family="sans-serif">Lata llena</text>
+          <rect x="100" y="30" width="180" height="20" rx="3" fill="#d3d1c7" stroke="#888780" stroke-width="0.8"/>
+          <ellipse cx="190" cy="30" rx="45" ry="7" fill="#e8e6de" stroke="#5f5e5a" stroke-width="0.8"/>
+          <ellipse cx="190" cy="40" rx="47" ry="7" fill="#9fe1cb" stroke="#1d9e75" stroke-width="1"/>
+          <ellipse cx="190" cy="35" rx="28" ry="5" fill="#afa9ec" stroke="#534ab7" stroke-width="1"/>
+          <rect x="98" y="22" width="8" height="28" rx="2" fill="#f09975" stroke="#d85a30" stroke-width="1"/>
+          <rect x="175" y="12" width="30" height="12" rx="3" fill="#fac775" stroke="#ba7517" stroke-width="1"/>
+          <circle cx="250" cy="40" r="8" fill="#1d9e75"/><text x="250" y="44" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif" font-weight="600">1</text>
+          <circle cx="270" cy="26" r="8" fill="#185fa5"/><text x="270" y="30" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif" font-weight="600">2</text>
+          <circle cx="165" cy="8" r="8" fill="#ba7517"/><text x="165" y="12" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif" font-weight="600">3</text>
+          <circle cx="130" cy="40" r="8" fill="#534ab7"/><text x="130" y="44" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif" font-weight="600">4</text>
+          <circle cx="80" cy="22" r="8" fill="#d85a30"/><text x="80" y="26" text-anchor="middle" font-size="7" fill="#fff" font-family="sans-serif" font-weight="600">5</text>
+        </svg>
+      </div>
+      <ul class="order-list" id="order-gas" ondragover="onDragOver(event)">
+        <li class="order-item" draggable="true" data-pos="3" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDropGas(event)"><span class="drag-handle">⠿</span>Empujador de tapas</li>
+        <li class="order-item" draggable="true" data-pos="5" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDropGas(event)"><span class="drag-handle">⠿</span>Riel de guía de tapas</li>
+        <li class="order-item" draggable="true" data-pos="1" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDropGas(event)"><span class="drag-handle">⠿</span>Torreta de alimentación</li>
+        <li class="order-item" draggable="true" data-pos="4" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDropGas(event)"><span class="drag-handle">⠿</span>Inserto de la torreta de alimentación</li>
+        <li class="order-item" draggable="true" data-pos="2" ondragstart="onDragStart(event)" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondrop="onDropGas(event)"><span class="drag-handle">⠿</span>Placa de la torreta de alimentación</li>
+      </ul>
+      <div class="feedback" id="gas-order-feedback"></div>
+    </div>
+
+    <button class="btn btn-primary" style="width:100%;padding:.7rem;font-size:.95rem;margin-top:.5rem" onclick="showResult()">Ver resultado</button>
+
+    <div class="quiz-result" id="quiz-result" style="display:none">
+      <div class="score-num" id="score-num"></div>
+      <p style="color:var(--text2);margin-top:.3rem;font-size:.9rem" id="score-msg"></p>
+      <button class="btn" style="margin-top:1rem" onclick="resetQuiz()">Reintentar</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem;text-align:center;color:var(--text3);font-size:.8rem;margin-top:2rem">
+  Pneumatic Scale Angelus 181S — Material de estudio basado en el manual técnico oficial
+</footer>
+
+<script>
+// Nav scroll
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('nav a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(s.getBoundingClientRect().top<120)cur=s.id});
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur));
+});
+links.forEach(l=>l.addEventListener('click',e=>{e.preventDefault();document.querySelector(l.getAttribute('href')).scrollIntoView({behavior:'smooth'});}));
+
+// Diagrama gasificacion
+const partData={
+  1:{name:'Torreta de alimentación',color:'#1d9e75',desc:'Disco giratorio que transporta y posiciona cada lata conforme avanza hacia la estación de sellado. Tiene bolsillos o ranuras donde va asentada cada lata. Es la base del sistema de alimentación.'},
+  2:{name:'Placa de la torreta de alimentación',color:'#185fa5',desc:'Superficie plana que cubre la parte superior de la torreta. Contiene canales internos por donde fluye el CO₂ hacia abajo, dirigiéndolo al espacio cabeza de la lata justo antes de que se coloque la tapa.'},
+  3:{name:'Empujador de tapas',color:'#ba7517',desc:'Componente que toma la tapa y la empuja hacia abajo sobre la boca de la lata en el momento correcto. Trabaja coordinado con el flujo de gas para que la tapa no se coloque antes de que el CO₂ haya desplazado el aire.'},
+  4:{name:'Inserto de la torreta de alimentación',color:'#534ab7',desc:'Pieza interior de la torreta que dirige y sella el flujo de gas hacia el interior de la lata. Garantiza que el CO₂ llegue exactamente al espacio cabeza sin escaparse por los lados.'},
+  5:{name:'Riel de guía de tapas',color:'#d85a30',desc:'Carril que guía y alinea las tapas conforme se deslizan hacia su posición sobre cada lata. Mantiene las tapas en el ángulo y posición exactos para que el empujador las coloque correctamente.'}
+};
+function showPart(n){
+  const d=partData[n];
+  document.getElementById('part-callout').innerHTML=`<strong style="color:${d.color}">Componente ${n}: ${d.name}</strong>${d.desc}`;
+}
+
+// Stepper
+const steps1=[
+  {t:'Detener el flujo de aceite',d:'Apaga el motor del sistema de filtración, o cierra la válvula de bola de entrada para desviar el aceite hacia la válvula de alivio. No es necesario detener la engargoladora.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="20" y="60" width="80" height="40" rx="6" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1"/><text x="60" y="84" text-anchor="middle" font-size="11" fill="#0f6e56" font-family="sans-serif">Bomba aceite</text><rect x="130" y="60" width="80" height="40" rx="6" fill="#faeeda" stroke="#ba7517" stroke-width="1.5"/><text x="170" y="84" text-anchor="middle" font-size="11" fill="#854f0b" font-family="sans-serif">Detener motor</text><path d="M102 80 L128 80" stroke="#1d9e75" stroke-width="1.5" marker-end="url(#ar)" fill="none"/><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#1d9e75" stroke-width="1.5"/></marker></defs><text x="150" y="140" text-anchor="middle" font-size="10" fill="#888780" font-family="sans-serif">La engargoladora puede seguir operando</text></svg>`},
+  {t:'Drenar el aceite',d:'Abre la llave de drenaje en la parte inferior del cilindro (lado derecho), luego la purga superior. Dirige el aceite a un recipiente — puedes reutilizarlo.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="90" y="20" width="120" height="100" rx="10" fill="#e6f1fb" stroke="#185fa5" stroke-width="1"/><text x="150" y="55" text-anchor="middle" font-size="11" fill="#0c447c" font-family="sans-serif">Cilindro</text><text x="150" y="70" text-anchor="middle" font-size="10" fill="#378add" font-family="sans-serif">con aceite</text><rect x="125" y="125" width="50" height="12" rx="4" fill="#faeeda" stroke="#ba7517" stroke-width="1"/><text x="150" y="134" text-anchor="middle" font-size="9" fill="#854f0b" font-family="sans-serif">Drenaje inferior</text><circle cx="150" cy="18" r="6" fill="#faeeda" stroke="#ba7517" stroke-width="1"/><text x="150" y="8" text-anchor="middle" font-size="8" fill="#854f0b" font-family="sans-serif">Purga</text><text x="230" y="90" text-anchor="start" font-size="10" fill="#888780" font-family="sans-serif">Recipiente</text></svg>`},
+  {t:'Abrir el cilindro',d:'Retira el anillo de sujeción del cilindro y levanta la tapa para acceder al interior donde se encuentra la bolsa de filtro.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="90" y="50" width="120" height="80" rx="10" fill="#f1efe8" stroke="#888780" stroke-width="1" stroke-dasharray="4 2"/><text x="150" y="95" text-anchor="middle" font-size="11" fill="#5f5e5a" font-family="sans-serif">Cilindro abierto</text><rect x="80" y="30" width="140" height="18" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1"/><text x="150" y="43" text-anchor="middle" font-size="10" fill="#0f6e56" font-family="sans-serif">Tapa levantada</text></svg>`},
+  {t:'Revisar la junta tórica',d:'Inspecciona la junta tórica en busca de grietas, deformación o desgaste. Si está dañada o hubo fugas previas, reemplázala antes de continuar.',svg:`<svg width="100%" viewBox="0 0 300 160"><ellipse cx="150" cy="80" rx="70" ry="20" fill="none" stroke="#e24b4a" stroke-width="3"/><text x="150" y="85" text-anchor="middle" font-size="11" fill="#a32d2d" font-family="sans-serif">Junta tórica (O-ring)</text><text x="150" y="140" text-anchor="middle" font-size="10" fill="#888780" font-family="sans-serif">Revisar grietas y deformación</text><circle cx="195" cy="66" r="8" fill="#fcebeb" stroke="#e24b4a" stroke-width="1.5"/><text x="195" y="70" text-anchor="middle" font-size="9" fill="#a32d2d" font-family="sans-serif">X</text></svg>`},
+  {t:'Retirar la bolsa usada',d:'Levanta lentamente la bolsa por la correa, permitiendo que el aceite escurra de vuelta al cilindro. Si quieres recuperar más aceite, cuélgala sobre un recipiente.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="100" y="60" width="100" height="70" rx="6" fill="#e6f1fb" stroke="#185fa5" stroke-width="1"/><text x="150" y="100" text-anchor="middle" font-size="10" fill="#0c447c" font-family="sans-serif">Bolsa usada</text><path d="M150 60 L150 30" stroke="#185fa5" stroke-width="2"/><rect x="130" y="20" width="40" height="12" rx="4" fill="#b5d4f4" stroke="#185fa5" stroke-width="1"/><text x="150" y="29" text-anchor="middle" font-size="9" fill="#0c447c" font-family="sans-serif">Correa</text></svg>`},
+  {t:'Instalar la bolsa nueva',d:'Abre la bolsa plástica con el nuevo filtro. Usa la correa de tela exterior para empujar firmemente el anillo metálico sobre el asiento. No uses las tiras internas.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="100" y="50" width="100" height="80" rx="6" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1.5"/><text x="150" y="95" text-anchor="middle" font-size="10" fill="#0f6e56" font-family="sans-serif">Bolsa nueva</text><rect x="115" y="130" width="70" height="10" rx="3" fill="#9fe1cb" stroke="#1d9e75" stroke-width="1"/><text x="150" y="138" text-anchor="middle" font-size="8" fill="#085041" font-family="sans-serif">Anillo metálico asentado</text><circle cx="220" cy="70" r="18" fill="#fcebeb" stroke="#e24b4a" stroke-width="1"/><text x="220" y="68" text-anchor="middle" font-size="8" fill="#a32d2d" font-family="sans-serif">No usar</text><text x="220" y="78" text-anchor="middle" font-size="8" fill="#a32d2d" font-family="sans-serif">tiras internas</text></svg>`},
+  {t:'Rellenar con aceite y cerrar',d:'Cierra la llave de drenaje y llena la bolsa con el aceite recuperado. Luego coloca la junta, la tapa y aprieta el anillo de sujeción.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="90" y="30" width="120" height="100" rx="10" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1.5"/><text x="150" y="85" text-anchor="middle" font-size="11" fill="#0f6e56" font-family="sans-serif">Rellenar con aceite</text><rect x="80" y="25" width="140" height="8" rx="3" fill="#9fe1cb" stroke="#1d9e75" stroke-width="1"/><text x="150" y="18" text-anchor="middle" font-size="9" fill="#0f6e56" font-family="sans-serif">Tapa y junta colocadas</text></svg>`},
+  {t:'Purgar el aire y verificar',d:'Arranca el motor. Abre la purga superior y espera a que salga aceite en lugar de aire — entonces ciérrala. Limpia el área y verifica que no haya fugas.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="90" y="30" width="120" height="100" rx="10" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1.5"/><circle cx="150" cy="20" r="7" fill="#faeeda" stroke="#ba7517" stroke-width="1.5"/><text x="150" y="24" text-anchor="middle" font-size="8" fill="#854f0b" font-family="sans-serif">Purga</text><text x="200" y="60" font-size="9" fill="#888780" font-family="sans-serif">Aire sale</text><text x="200" y="90" font-size="9" fill="#185fa5" font-family="sans-serif">Aceite sale: cerrar</text><text x="150" y="155" text-anchor="middle" font-size="10" fill="#1d9e75" font-family="sans-serif">Verificar sin fugas</text></svg>`}
+];
+const steps2=[
+  {t:'Detener el flujo de aceite',d:'Apaga el sistema de filtración o cierra la válvula de entrada. Captura el aceite drenado para reutilizarlo.',svg:steps1[0].svg},
+  {t:'Drenar el aceite del cilindro',d:'Abre la purga en la parte inferior del cilindro, luego la purga superior. Capta el aceite para reutilizarlo.',svg:steps1[1].svg},
+  {t:'Retirar la anilla de sujeción',d:'Gira la manija en T en sentido antihorario hasta que la barra pueda levantarse del soporte.',svg:`<svg width="100%" viewBox="0 0 300 160"><circle cx="150" cy="80" r="50" fill="none" stroke="#185fa5" stroke-width="2"/><path d="M150 30 A50 50 0 0 0 100 80" stroke="#e24b4a" stroke-width="3" fill="none" stroke-dasharray="8 3"/><text x="88" y="50" font-size="10" fill="#a32d2d" font-family="sans-serif">Antihorario</text><text x="150" y="85" text-anchor="middle" font-size="11" fill="#185fa5" font-family="sans-serif">Manija en T</text></svg>`},
+  {t:'Revisar la junta tórica',d:'Examina la junta tórica del cilindro en busca de grietas y desgaste. Si la tapa tenía fugas o la junta está deteriorada, cámbiala.',svg:steps1[3].svg},
+  {t:'Desenroscar la manija en T',d:'Gira la manija en T en sentido horario para liberar el elemento del poste central. Si está atascada, balancéala ligeramente mientras giras.',svg:`<svg width="100%" viewBox="0 0 300 160"><circle cx="150" cy="80" r="50" fill="none" stroke="#1d9e75" stroke-width="2"/><path d="M150 30 A50 50 0 0 1 200 80" stroke="#1d9e75" stroke-width="3" fill="none" stroke-dasharray="8 3"/><text x="195" y="50" font-size="10" fill="#0f6e56" font-family="sans-serif">Horario</text><text x="150" y="85" text-anchor="middle" font-size="11" fill="#1d9e75" font-family="sans-serif">Desenroscar</text></svg>`},
+  {t:'Retirar el elemento usado',d:'Levanta el elemento usado del poste central y guárdalo en la bolsa plástica del empaque nuevo.',svg:steps1[4].svg},
+  {t:'Instalar el elemento nuevo — orientación crítica',d:'Desliza el nuevo elemento sobre el poste central. Orientación crítica: balín metálico en la parte superior, juntas tóricas negras sellando en la parte inferior.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="130" y="30" width="40" height="110" rx="8" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1.5"/><circle cx="150" cy="38" r="8" fill="#fac775" stroke="#ba7517" stroke-width="1.5"/><text x="195" y="42" font-size="9" fill="#854f0b" font-family="sans-serif">Balín — ARRIBA</text><ellipse cx="150" cy="132" rx="20" ry="6" fill="none" stroke="#e24b4a" stroke-width="2"/><text x="195" y="135" font-size="9" fill="#a32d2d" font-family="sans-serif">Juntas — ABAJO</text></svg>`},
+  {t:'Asegurar con la manija en T',d:'Inserta la manija en T en la férula y gírala en sentido horario hasta hacer contacto con el poste central.',svg:`<svg width="100%" viewBox="0 0 300 160"><rect x="130" y="30" width="40" height="110" rx="8" fill="#e1f5ee" stroke="#1d9e75" stroke-width="1.5"/><path d="M150 55 A25 25 0 0 1 175 80" stroke="#1d9e75" stroke-width="3" fill="none"/><text x="185" y="60" font-size="9" fill="#0f6e56" font-family="sans-serif">Horario — asegurar</text></svg>`},
+  {t:'Cerrar el cilindro',d:'Cierra la purga inferior, rellena el cilindro con el aceite recuperado. Coloca la junta tórica, la tapa y asegura girando la anilla en sentido antihorario.',svg:steps1[6].svg},
+  {t:'Purgar aire y verificar',d:'Arranca la bomba y deja salir el aire por la purga superior. Cierra cuando empiece a salir aceite. Limpia la unidad y verifica que no haya fugas.',svg:steps1[7].svg}
+];
+let cur1=0,cur2=0;
+function buildDots(id,n,cur){
+  const c=document.getElementById(id);c.innerHTML='';
+  for(let i=0;i<n;i++){const d=document.createElement('div');d.className='dot'+(i===cur?' active':'');d.onclick=()=>goStep(id.replace('dots',''),i);c.appendChild(d);}
+}
+function renderStep(f,i){
+  const steps=f===1?steps1:steps2;const s=steps[i];
+  document.getElementById('stitle'+f).textContent=`Paso ${i+1}: ${s.t}`;
+  document.getElementById('sdesc'+f).textContent=s.d;
+  document.getElementById('visual'+f).innerHTML=s.svg||'';
+  document.getElementById('step-label'+f).textContent=`Paso ${i+1} de ${steps.length}`;
+  document.getElementById('scounter'+f).textContent=`${i+1} / ${steps.length}`;
+  buildDots('dots'+f,steps.length,i);
+}
+function goStep(f,i){if(f==1)cur1=i;else cur2=i;renderStep(f,i);}
+function nextStep(f){const steps=f===1?steps1:steps2;if(f==1&&cur1<steps.length-1)cur1++;else if(f==2&&cur2<steps.length-1)cur2++;renderStep(f,f===1?cur1:cur2);}
+function prevStep(f){if(f==1&&cur1>0)cur1--;else if(f==2&&cur2>0)cur2--;renderStep(f,f===1?cur1:cur2);}
+function showFilter(n){
+  document.getElementById('filter1').style.display=n===1?'block':'none';
+  document.getElementById('filter2').style.display=n===2?'block':'none';
+  document.getElementById('btn-f1').className=n===1?'btn btn-primary':'btn';
+  document.getElementById('btn-f2').className=n===2?'btn btn-primary':'btn';
+}
+renderStep(1,0);renderStep(2,0);
+
+// Quiz
+function selectSingle(el){
+  const q=el.dataset.q;
+  document.querySelectorAll(`[data-q="${q}"]`).forEach(o=>{o.classList.remove('correct','wrong');o.querySelector('.opt-mark').textContent='';});
+  el.classList.add(el.dataset.correct?'correct':'wrong');
+  el.querySelector('.opt-mark').textContent=el.dataset.correct?'✓':'✗';
+}
+const multiSel={};
+function toggleMulti(el){
+  const q=el.dataset.q;if(!multiSel[q])multiSel[q]=new Set();
+  if(multiSel[q].has(el)){multiSel[q].delete(el);el.classList.remove('correct','wrong');el.querySelector('.opt-mark').textContent='□';}
+  else{multiSel[q].add(el);el.classList.add(el.dataset.correct?'correct':'wrong');el.querySelector('.opt-mark').textContent=el.dataset.correct?'✓':'✗';}
+}
+function checkOpen(el,ans,fbId){
+  const fb=document.getElementById(fbId);
+  if(el.value.trim()===ans){fb.textContent='Correcto';fb.className='feedback fb-ok';}
+  else if(el.value.trim().length>0){fb.textContent='Revisa tu respuesta';fb.className='feedback fb-bad';}
+  else{fb.className='feedback';}
+}
+let dragSrc=null;
+function onDragStart(e){dragSrc=e.currentTarget;e.currentTarget.classList.add('dragging');}
+function onDragEnter(e){e.preventDefault();if(e.currentTarget!==dragSrc)e.currentTarget.classList.add('over');}
+function onDragLeave(e){e.currentTarget.classList.remove('over');}
+function onDragOver(e){e.preventDefault();}
+function dropIntoList(e,listId,feedbackId,checkFn){
+  e.preventDefault();const t=e.currentTarget;t.classList.remove('over');
+  if(dragSrc&&dragSrc!==t){const list=document.getElementById(listId);const items=[...list.children];const si=items.indexOf(dragSrc),ti=items.indexOf(t);if(si<ti)t.after(dragSrc);else t.before(dragSrc);}
+  if(dragSrc)dragSrc.classList.remove('dragging');
+  checkFn(listId,feedbackId);
+}
+function onDrop(e){dropIntoList(e,'order-list','order-feedback',(lid,fid)=>{
+  const items=[...document.getElementById(lid).children];
+  const ok=items.map(i=>parseInt(i.dataset.pos)).join('')==='123';
+  const fb=document.getElementById(fid);fb.textContent=ok?'Orden correcto':'Orden incorrecto, sigue intentando';fb.className='feedback '+(ok?'fb-ok':'fb-bad');
+});}
+function onDropGas(e){dropIntoList(e,'order-gas','gas-order-feedback',(lid,fid)=>{
+  const items=[...document.getElementById(lid).children];
+  const ok=items.map(i=>parseInt(i.dataset.pos)).join('')==='12345';
+  const fb=document.getElementById(fid);fb.textContent=ok?'Orden correcto':'Orden incorrecto, sigue intentando';fb.className='feedback '+(ok?'fb-ok':'fb-bad');
+});}
+document.getElementById('order-list').addEventListener('dragend',()=>{document.querySelectorAll('#order-list .order-item').forEach(i=>i.classList.remove('dragging','over'));});
+document.getElementById('order-gas').addEventListener('dragend',()=>{document.querySelectorAll('#order-gas .order-item').forEach(i=>i.classList.remove('dragging','over'));});
+
+function showResult(){
+  let score=0;const total=15;
+  const q1opts=document.querySelectorAll('[data-q="1"]');
+  let q1ok=multiSel['1']&&multiSel['1'].size>0;
+  if(q1ok){q1opts.forEach(o=>{if(o.dataset.correct&&!o.classList.contains('correct'))q1ok=false;if(!o.dataset.correct&&o.classList.contains('correct'))q1ok=false;});}
+  if(q1ok)score++;
+  [2,3,4,5,6,8,9,10,12,13,14].forEach(q=>{if(document.querySelector(`[data-q="${q}"].correct`))score++;});
+  if([...document.getElementById('order-list').children].map(i=>parseInt(i.dataset.pos)).join('')==='123')score++;
+  if(document.getElementById('open1').value.trim()==='6')score++;
+  if([...document.getElementById('order-gas').children].map(i=>parseInt(i.dataset.pos)).join('')==='12345')score++;
+  const pct=Math.round(score/total*100);
+  document.getElementById('score-num').textContent=`${score} / ${total}`;
+  document.getElementById('score-msg').textContent=pct>=85?'Excelente dominio del tema':pct>=65?'Buen avance, repasa los puntos fallidos':'Revisa el material y vuelve a intentarlo';
+  document.getElementById('quiz-result').style.display='block';
+  document.getElementById('quiz-result').scrollIntoView({behavior:'smooth'});
+}
+function resetQuiz(){
+  document.querySelectorAll('.opt').forEach(o=>{o.classList.remove('correct','wrong');o.querySelector('.opt-mark').textContent=o.classList.contains('multi')?'□':'';});
+  Object.keys(multiSel).forEach(k=>delete multiSel[k]);
+  document.getElementById('open1').value='';
+  document.getElementById('open1-fb').className='feedback';
+  document.getElementById('order-feedback').className='feedback';
+  document.getElementById('gas-order-feedback').className='feedback';
+  document.getElementById('quiz-result').style.display='none';
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
